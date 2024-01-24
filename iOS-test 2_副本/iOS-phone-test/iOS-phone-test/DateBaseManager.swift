@@ -146,6 +146,10 @@ func DataBaseMangerInit() {
     DatabaseManager.shared.insertImageData(label: "操场", remoteImageUrl: "https://www.zhonzhuan.com/UploadFiles/EditImage/202110/06f8ebceae6b69004684ae43f14e3b3e.jpg")
     DatabaseManager.shared.insertImageData(label: "体育馆", remoteImageUrl: "https://img-blog.csdnimg.cn/img_convert/ff474e93251bc779735188fdf6f6a130.png")
     DatabaseManager.shared.insertImageData(label: "地大国际会议中心", remoteImageUrl: "https://att01.zjut.cc/attachment/college/album/big/yzy/img1/p00029010_800.jpeg")
+    DatabaseManager.shared.insertImageData(label: "校徽", remoteImageUrl: "https://inews.gtimg.com/newsapp_bt/0/14149626711/641")
+    DatabaseManager.shared.insertImageData(label: "校徽和校名", remoteImageUrl: "https://www.niegobrand.com/uploads/image/20211110/1636515660.png")
+    DatabaseManager.shared.insertImageData(label: "70周年校庆", remoteImageUrl: "https://n.sinaimg.cn/spider20211107/560/w1080h1080/20211107/785c-05c6b8d3e097902157535c0917113dea.jpg")
+    
     
     //这里可以用于测试其他函数
     //DatabaseManager.shared.updateRemoteImageUrl(withLabel: "教5楼", newRemoteImageUrl: "https://p9.itc.cn/images01/20210121/74bf0af0bcda4cbaaf854261bd626459.jpeg")

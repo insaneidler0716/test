@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         data = DatabaseManager.shared.getAllImageData()
     
         view.addSubview(tableView)
-        tableView.rowHeight = 60.0 
+        tableView.rowHeight = 60
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
