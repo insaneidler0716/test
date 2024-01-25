@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "81B73BAA-93BA-460B-954F-0138A3A114AA"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOS-phone-test/TimePickerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04 - 25df9ab2f62a4a51"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; __C.UILabel in iOS_phone_test.TimePickerViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "iOS-phone-test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lihaonan/Desktop/iOS-test%202/iOS-phone-test/iOS-phone-test/TimePickerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04 - d23fe66580c4880b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOS_phone_test.TimePickerViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "iOS-phone-test"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lihaonan/Desktop/iOS-test%202/iOS-phone-test/iOS-phone-test/TimePickerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "456">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
