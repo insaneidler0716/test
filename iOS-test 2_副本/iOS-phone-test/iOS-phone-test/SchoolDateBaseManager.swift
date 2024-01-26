@@ -7,8 +7,8 @@
 
 import FMDB
 
-class DatabaseManager {
-    static let shared = DatabaseManager()
+class SchoolDatabaseManager {
+    static let shared = SchoolDatabaseManager()
     var database: FMDatabase?
 
     private init() {
@@ -18,7 +18,7 @@ class DatabaseManager {
 
     private func openDatabase() {
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("ImageDatabase.sqlite")
+            .appendingPathComponent("SchoolDatabase.sqlite")
 
         database = FMDatabase(url: fileURL)
         if database?.open() == false {
@@ -135,20 +135,20 @@ class DatabaseManager {
 }
 
 // 初始化数据库
-func DataBaseMangerInit() {
-    DatabaseManager.shared.clearAllData()
+func SchoolDataBaseMangerInit() {
+    SchoolDatabaseManager.shared.clearAllData()
     
-    DatabaseManager.shared.insertImageData(label: "东门", remoteImageUrl: "https://img0.baidu.com/it/u=953406266,1697631948&fm=253&fmt=auto&app=138&f=JPEG?w=569&h=315")
-    DatabaseManager.shared.insertImageData(label: "逸夫楼", remoteImageUrl: "https://img1.baidu.com/it/u=4061477052,1450312856&fm=253&fmt=auto&app=120&f=PNG?w=746&h=500")
-    DatabaseManager.shared.insertImageData(label: "I love CUGB", remoteImageUrl: "https://p3.itc.cn/images01/20210608/19b0c5567e3a4d77aa21816f7630ee25.jpeg")
-    DatabaseManager.shared.insertImageData(label: "教5楼", remoteImageUrl: "https://5b0988e595225.cdn.sohucs.com/images/20180307/024022f6d48f412397d8bdf47947bf4c.jpeg")
-    DatabaseManager.shared.insertImageData(label: "摇篮石", remoteImageUrl: "https://img0.baidu.com/it/u=1012787430,386486834&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500")
-    DatabaseManager.shared.insertImageData(label: "操场", remoteImageUrl: "https://www.zhonzhuan.com/UploadFiles/EditImage/202110/06f8ebceae6b69004684ae43f14e3b3e.jpg")
-    DatabaseManager.shared.insertImageData(label: "体育馆", remoteImageUrl: "https://img-blog.csdnimg.cn/img_convert/ff474e93251bc779735188fdf6f6a130.png")
-    DatabaseManager.shared.insertImageData(label: "地大国际会议中心", remoteImageUrl: "https://att01.zjut.cc/attachment/college/album/big/yzy/img1/p00029010_800.jpeg")
-    DatabaseManager.shared.insertImageData(label: "校徽", remoteImageUrl: "https://inews.gtimg.com/newsapp_bt/0/14149626711/641")
-    DatabaseManager.shared.insertImageData(label: "校徽和校名", remoteImageUrl: "https://www.niegobrand.com/uploads/image/20211110/1636515660.png")
-    DatabaseManager.shared.insertImageData(label: "70周年校庆", remoteImageUrl: "https://n.sinaimg.cn/spider20211107/560/w1080h1080/20211107/785c-05c6b8d3e097902157535c0917113dea.jpg")
+    SchoolDatabaseManager.shared.insertImageData(label: "东门", remoteImageUrl: "https://img0.baidu.com/it/u=953406266,1697631948&fm=253&fmt=auto&app=138&f=JPEG?w=569&h=315")
+    SchoolDatabaseManager.shared.insertImageData(label: "逸夫楼", remoteImageUrl: "https://img1.baidu.com/it/u=4061477052,1450312856&fm=253&fmt=auto&app=120&f=PNG?w=746&h=500")
+    SchoolDatabaseManager.shared.insertImageData(label: "I love CUGB", remoteImageUrl: "https://p3.itc.cn/images01/20210608/19b0c5567e3a4d77aa21816f7630ee25.jpeg")
+    SchoolDatabaseManager.shared.insertImageData(label: "教5楼", remoteImageUrl: "https://5b0988e595225.cdn.sohucs.com/images/20180307/024022f6d48f412397d8bdf47947bf4c.jpeg")
+    SchoolDatabaseManager.shared.insertImageData(label: "摇篮石", remoteImageUrl: "https://img0.baidu.com/it/u=1012787430,386486834&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500")
+    SchoolDatabaseManager.shared.insertImageData(label: "操场", remoteImageUrl: "https://www.zhonzhuan.com/UploadFiles/EditImage/202110/06f8ebceae6b69004684ae43f14e3b3e.jpg")
+    SchoolDatabaseManager.shared.insertImageData(label: "体育馆", remoteImageUrl: "https://img-blog.csdnimg.cn/img_convert/ff474e93251bc779735188fdf6f6a130.png")
+    SchoolDatabaseManager.shared.insertImageData(label: "地大国际会议中心", remoteImageUrl: "https://att01.zjut.cc/attachment/college/album/big/yzy/img1/p00029010_800.jpeg")
+    SchoolDatabaseManager.shared.insertImageData(label: "校徽", remoteImageUrl: "https://inews.gtimg.com/newsapp_bt/0/14149626711/641")
+    SchoolDatabaseManager.shared.insertImageData(label: "校徽和校名", remoteImageUrl: "https://www.niegobrand.com/uploads/image/20211110/1636515660.png")
+    SchoolDatabaseManager.shared.insertImageData(label: "70周年校庆", remoteImageUrl: "https://n.sinaimg.cn/spider20211107/560/w1080h1080/20211107/785c-05c6b8d3e097902157535c0917113dea.jpg")
     
     
     //这里可以用于测试其他函数

@@ -13,7 +13,7 @@ class CollectionViewController: UICollectionViewCell {
     
     private let collectionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
         
@@ -33,7 +33,7 @@ class CollectionViewController: UICollectionViewCell {
         collectionRemoteImageView.snp.makeConstraints { make in
             make.height.equalTo(100)
             make.centerY.equalToSuperview().offset(-10)
-            make.width.equalTo(40)
+            make.width.equalTo(60)
         }
 
         collectionLabel.snp.makeConstraints { make in

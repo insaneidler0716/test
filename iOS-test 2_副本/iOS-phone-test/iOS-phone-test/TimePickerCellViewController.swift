@@ -17,11 +17,12 @@ class TimePickerCellViewController: UITableViewCell {
         return label
     }()
     
-    let rightLabel: UILabel = {
+    var selectionRightLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
+    
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -34,9 +35,9 @@ class TimePickerCellViewController: UITableViewCell {
             make.left.equalToSuperview().offset(30)
         }
         
-        // rightLabel
-        addSubview(rightLabel)
-        rightLabel.snp.makeConstraints { make in
+        // selectionRightLabel
+        addSubview(selectionRightLabel)
+        selectionRightLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-30)
         }
@@ -46,3 +47,6 @@ class TimePickerCellViewController: UITableViewCell {
         super.init(coder: aDecoder)
     }
 }
+
+
+

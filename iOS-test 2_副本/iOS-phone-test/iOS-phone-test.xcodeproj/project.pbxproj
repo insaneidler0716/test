@@ -10,7 +10,10 @@
 		841703C12B612AFE0017729A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C02B612AFE0017729A /* CollectionViewController.swift */; };
 		841703C32B622FAE0017729A /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C22B622FAE0017729A /* TimePickerViewController.swift */; };
 		841703C52B624BD80017729A /* TimePickerCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C42B624BD80017729A /* TimePickerCellViewController.swift */; };
-		84AE7ED22B5E34D1001829EE /* DateBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE7ED12B5E34D1001829EE /* DateBaseManager.swift */; };
+		841703C92B62920E0017729A /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C82B62920E0017729A /* SelectionViewController.swift */; };
+		841703CB2B6293730017729A /* SelectionCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703CA2B6293730017729A /* SelectionCellViewController.swift */; };
+		841703CD2B6297630017729A /* MusicDataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703CC2B6297630017729A /* MusicDataBaseManager.swift */; };
+		84AE7ED22B5E34D1001829EE /* SchoolDateBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE7ED12B5E34D1001829EE /* SchoolDateBaseManager.swift */; };
 		84AE7ED42B5E4F73001829EE /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE7ED32B5E4F73001829EE /* ImageData.swift */; };
 		84FBDAB12B59025600522EB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84FBDAAF2B59025600522EB2 /* LaunchScreen.storyboard */; };
 		84FBDAB92B59043E00522EB2 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84FBDAB82B59043E00522EB2 /* Image.xcassets */; };
@@ -27,7 +30,10 @@
 		841703C02B612AFE0017729A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		841703C22B622FAE0017729A /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		841703C42B624BD80017729A /* TimePickerCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCellViewController.swift; sourceTree = "<group>"; };
-		84AE7ED12B5E34D1001829EE /* DateBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBaseManager.swift; sourceTree = "<group>"; };
+		841703C82B62920E0017729A /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		841703CA2B6293730017729A /* SelectionCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCellViewController.swift; sourceTree = "<group>"; };
+		841703CC2B6297630017729A /* MusicDataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDataBaseManager.swift; sourceTree = "<group>"; };
+		84AE7ED12B5E34D1001829EE /* SchoolDateBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDateBaseManager.swift; sourceTree = "<group>"; };
 		84AE7ED32B5E4F73001829EE /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		84FBDAA12B59025400522EB2 /* iOS-phone-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-phone-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84FBDAB02B59025600522EB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,7 +97,10 @@
 				841703C02B612AFE0017729A /* CollectionViewController.swift */,
 				841703C22B622FAE0017729A /* TimePickerViewController.swift */,
 				841703C42B624BD80017729A /* TimePickerCellViewController.swift */,
-				84AE7ED12B5E34D1001829EE /* DateBaseManager.swift */,
+				841703C82B62920E0017729A /* SelectionViewController.swift */,
+				841703CA2B6293730017729A /* SelectionCellViewController.swift */,
+				841703CC2B6297630017729A /* MusicDataBaseManager.swift */,
+				84AE7ED12B5E34D1001829EE /* SchoolDateBaseManager.swift */,
 				84FBDAB82B59043E00522EB2 /* Image.xcassets */,
 				84FBDACA2B5BBBB000522EB2 /* Assets.xcassets */,
 				84FBDAAF2B59025600522EB2 /* LaunchScreen.storyboard */,
@@ -229,10 +238,13 @@
 				841703C32B622FAE0017729A /* TimePickerViewController.swift in Sources */,
 				84FBDAD12B5E180900522EB2 /* CellViewController.swift in Sources */,
 				84FBDAD52B5E182900522EB2 /* ViewController.swift in Sources */,
+				841703C92B62920E0017729A /* SelectionViewController.swift in Sources */,
 				841703C12B612AFE0017729A /* CollectionViewController.swift in Sources */,
-				84AE7ED22B5E34D1001829EE /* DateBaseManager.swift in Sources */,
+				84AE7ED22B5E34D1001829EE /* SchoolDateBaseManager.swift in Sources */,
 				84FBDACF2B5E17FF00522EB2 /* AppDelegate.swift in Sources */,
+				841703CB2B6293730017729A /* SelectionCellViewController.swift in Sources */,
 				84AE7ED42B5E4F73001829EE /* ImageData.swift in Sources */,
+				841703CD2B6297630017729A /* MusicDataBaseManager.swift in Sources */,
 				841703C52B624BD80017729A /* TimePickerCellViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

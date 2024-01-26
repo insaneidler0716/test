@@ -10,7 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-    var data: [(label: String, remoteImageUrl: String)] = []
+    var singerData: [ImageData] = []
     
     
     lazy var tableView: UITableView = {
@@ -24,8 +24,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DataBaseMangerInit()
-        data = DatabaseManager.shared.getAllImageData()
+        MusicDatabaseManager.shared.MusicDatabaseManagerInit()
+        singerData = MusicDatabaseManager.shared.getAllSingers()
     
         view.addSubview(tableView)
         tableView.rowHeight = 60
@@ -38,12 +38,12 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return singerData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CellViewController
-        let item = data[indexPath.row]
+        let item = singerData[indexPath.row]
         cell.configure(text: item.label, imageUrl: item.remoteImageUrl)
         return cell
     }
@@ -51,7 +51,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          tableView.deselectRow(at: indexPath, animated: true)
          let detailViewController = DetailViewController()
-         let item = data[indexPath.row]
+         let item = singerData[indexPath.row]
          detailViewController.configure(text: item.label, imageUrl: item.remoteImageUrl)
          navigationController?.pushViewController(detailViewController, animated: true)
      }
