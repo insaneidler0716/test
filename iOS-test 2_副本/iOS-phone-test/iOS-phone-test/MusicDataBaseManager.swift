@@ -197,6 +197,23 @@ extension MusicDatabaseManager {
         }
     }
 }
+// 查询专辑网络地址
+extension MusicDatabaseManager{
+    func getAlbumImageUrl(forAlbum albumName: String) -> String? {
+        let selectAlbumQuery = "SELECT albumImageURL FROM Album WHERE albumName = ?"
+
+        do {
+            let resultSet = try database?.executeQuery(selectAlbumQuery, values: [albumName])
+            if resultSet?.next() ?? false, let albumImageURL = resultSet?.string(forColumn: "albumImageURL") {
+                return albumImageURL
+            }
+        } catch {
+            print("查询专辑网络地址时出错: \(error.localizedDescription)")
+        }
+
+        return nil
+    }
+}
 
 extension MusicDatabaseManager {
     func MusicDatabaseManagerInit() {

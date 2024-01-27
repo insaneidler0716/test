@@ -98,11 +98,11 @@ class DetailViewController: UIViewController {
         
         
         // 单选按钮创建
-        createSingleSelectionRadioButton(title: "10 minutes", tag: 1)
-        createSingleSelectionRadioButton(title: "20 minutes", tag: 2)
-        createSingleSelectionRadioButton(title: "30 minutes", tag: 3)
-        createSingleSelectionRadioButton(title: "60 minutes", tag: 4)
-        createSingleSelectionRadioButton(title: "120 minutes", tag: 5)
+        createSingleSelectionRadioButton(title: "10 seconds", tag: 1)
+        createSingleSelectionRadioButton(title: "20 seconds", tag: 2)
+        createSingleSelectionRadioButton(title: "30 seconds", tag: 3)
+        createSingleSelectionRadioButton(title: "60 seconds", tag: 4)
+        createSingleSelectionRadioButton(title: "120 seconds", tag: 5)
         // 单选按钮约束
         for (index, button) in singleSeclectionRadioButton.enumerated() {
             backgroundView.addSubview(button)
@@ -208,6 +208,7 @@ class DetailViewController: UIViewController {
             sender.isSelected = false
             UserDefaults.standard.set(false, forKey: "RadioButtonSelected\(sender.tag)")
             print("你取消了选择")
+            UserDefaults.standard.setValue( 0 , forKey: "RadioButtonSelectedValue")
             return
         }
         // 取消之前选中的按钮的选中状态
@@ -220,6 +221,8 @@ class DetailViewController: UIViewController {
         sender.isSelected = true
         // 保存选中的按钮状态
         UserDefaults.standard.set(true, forKey: "RadioButtonSelected\(sender.tag)")
+        UserDefaults.standard.setValue(sender.tag , forKey: "RadioButtonSelectedValue")
+        print(sender.tag)
 
         // 在这里执行选中后的操作，比如处理选中的选项
         let selectedOption = sender.tag

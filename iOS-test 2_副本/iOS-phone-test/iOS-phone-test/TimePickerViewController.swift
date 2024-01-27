@@ -41,11 +41,8 @@ class TimePickerViewController: UIViewController {
         return tableView
     }()
     
-    // 单元格标签
+    // 单元格左部标签
     let tableData: [String] = ["播放模式", "音乐效果"]
-    
-    // 播放模式和音乐效果全部会保存在这里，初始值设置为无
-    var tableSelectData: [String] = ["无", "无"]
     
     
     // 底部按钮
@@ -57,11 +54,6 @@ class TimePickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 读取歌曲播放模式和音乐效果选项保存值
-        if let saveTableSelectData = UserDefaults.standard.array(forKey: "tableSelectData") as? [String] {
-            tableSelectData = saveTableSelectData
-        }
         
         // 背景
         let backgroundView = UIView()
@@ -137,7 +129,7 @@ class TimePickerViewController: UIViewController {
         }
         
         // 底部按钮创建
-        let button = createOptionButton(title: "返回", tag: 1)
+        let button = createOptionButton(title: "开始播放", tag: 1)
         buttonBackgroundView.addSubview(button)
         // 底部按钮约束
         button.snp.makeConstraints { make in
@@ -190,7 +182,35 @@ class TimePickerViewController: UIViewController {
         selectedButton = sender
         selectedButton?.isSelected = true
         // 在这里执行选中后的操作，比如处理选中的选项
-        self.navigationController?.popViewController(animated: true)
+        let musicPlayViewController = MusicPlayerViewController()
+        let coverImageUrl = MusicDatabaseManager.shared.getAlbumImageUrl(forAlbum: detailLabel.text!)
+        musicPlayViewController.configure(imageUrl: coverImageUrl!)
+        musicPlayViewController.songLabel.text = detailLabel.text!
+        musicPlayViewController.playMode = UserDefaults.standard.string(forKey: "SelectedPlayMode") ?? ""
+        musicPlayViewController.musicEffect = UserDefaults.standard.string(forKey: "SelectedMusicEffect") ?? ""
+        if let buttonSelectedValue = UserDefaults.standard.value(forKey: "RadioButtonSelectedValue") as? Int {
+            switch Int(buttonSelectedValue) {
+            case 0:
+                musicPlayViewController.countdownDuration = 100
+            case 1:
+                musicPlayViewController.countdownDuration = 10
+            case 2:
+                musicPlayViewController.countdownDuration = 20
+            case 3:
+                musicPlayViewController.countdownDuration = 30
+            case 4:
+                musicPlayViewController.countdownDuration = 40
+            case 5:
+                musicPlayViewController.countdownDuration = 120
+            default:
+                musicPlayViewController.countdownDuration = 100
+            }
+        }
+        //var sec = UserDefaults.standard.bool(forKey: "RadioButtonSelected\(button.tag)")
+        //musicPlayViewController.countdownDuration = 30
+        //musicPlayViewController.timeLabel.text = 10
+        //self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(musicPlayViewController, animated: true)
     }
 }
 
@@ -293,25 +313,23 @@ extension TimePickerViewController: UITableViewDelegate, UITableViewDataSource {
         let timePickerCell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell", for: indexPath) as! TimePickerCellViewController
         timePickerCell.accessoryType = .disclosureIndicator
         timePickerCell.titleLabel.text = tableData[indexPath.row]
-        timePickerCell.selectionRightLabel.text = tableSelectData[indexPath.row]
+        let selectedPlayMode = UserDefaults.standard.string(forKey: "SelectedPlayMode") ?? ""
+        let selectdedMusicEffect = UserDefaults.standard.string(forKey: "SelectedMusicEffect") ?? ""
+        if indexPath.row == 0 {
+            timePickerCell.selectionRightLabel.text = selectedPlayMode
+        } else {
+            timePickerCell.selectionRightLabel.text = selectdedMusicEffect
+        }
         return timePickerCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // 声明一个变量保存当前选中的 indexPath.row
-        let selectedRow = indexPath.row
-        let selectionViewController = SelectionViewController()
-        selectionViewController.selectMode = selectedRow
-        // 设置闭包
-        selectionViewController.didSelectDataClosure = { [weak self] selectedData in
-            // 处理闭包中传递过来的数据，使用保存的 selectedRow
-            self?.tableSelectData[selectedRow] = selectedData
-            self?.timePickerTableView.reloadData()
-            // 将数据存入 UserDefaults
-            UserDefaults.standard.set(self?.tableSelectData, forKey: "tableSelectData")
+        if indexPath.row == 0 {
+            showPlayModeOptions()
+        } else {
+            showMusicEffectOptions()
         }
-        navigationController?.pushViewController(selectionViewController, animated: true)
     }
 
 }
