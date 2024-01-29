@@ -53,6 +53,7 @@ class MusicPlayerViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
+    
     // 暂停与继续按钮
     private let playPauseButton: UIButton = {
         let button = UIButton()
@@ -77,7 +78,6 @@ class MusicPlayerViewController: UIViewController {
     
     // 播放器
     private var player: AVAudioPlayer?
-    //private var countdownTimer: Timer?
     
     // 倒计时数默认值
     var countdownDuration: Double = 100.00
@@ -102,23 +102,23 @@ class MusicPlayerViewController: UIViewController {
     
     private func setupViews() {
         
-        // 背景
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        view.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        
+        // 根据当前外观模式更新背景颜色
+        if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
+        } else {
+            view.backgroundColor = .white
         }
         
         // 添加子视图到 MusicPlayerView
-        backgroundView.addSubview(coverImageView)
-        backgroundView.addSubview(progressSlider)
-        backgroundView.addSubview(countDownTimeLabel)
-        backgroundView.addSubview(playPauseButton)
-        backgroundView.addSubview(modeLabel)
-        backgroundView.addSubview(effectLabel)
-        backgroundView.addSubview(playTimeLabel)
-        backgroundView.addSubview(songLabel)
+        view.addSubview(coverImageView)
+        view.addSubview(progressSlider)
+        view.addSubview(countDownTimeLabel)
+        view.addSubview(playPauseButton)
+        view.addSubview(modeLabel)
+        view.addSubview(effectLabel)
+        view.addSubview(playTimeLabel)
+        view.addSubview(songLabel)
         
         // 设置子视图的约束
         
@@ -239,6 +239,25 @@ class MusicPlayerViewController: UIViewController {
         let placeholderImage = UIImage(named: "IMG_PlaceHolder")
         if let url = URL(string: imageUrl) {
             coverImageView.yy_setImage(with: url, placeholder: placeholderImage, options: YYWebImageOptions.setImageWithFadeAnimation)
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateInterfaceForCurrentTheme()
+        }
+    }
+
+    func updateInterfaceForCurrentTheme() {
+        // 在这里执行更新界面的操作
+        if traitCollection.userInterfaceStyle == .dark {
+            // 暗色模式
+            view.backgroundColor = .black
+        } else {
+            // 亮色模式
+            view.backgroundColor = .white
         }
     }
 }

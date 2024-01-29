@@ -7,20 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		841703C12B612AFE0017729A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C02B612AFE0017729A /* CollectionViewController.swift */; };
+		841703C12B612AFE0017729A /* CollectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C02B612AFE0017729A /* CollectionCellView.swift */; };
 		841703C32B622FAE0017729A /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C22B622FAE0017729A /* TimePickerViewController.swift */; };
-		841703C52B624BD80017729A /* TimePickerCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C42B624BD80017729A /* TimePickerCellViewController.swift */; };
-		841703CD2B6297630017729A /* MusicDataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703CC2B6297630017729A /* MusicDataBaseManager.swift */; };
-		841703CF2B63CCEB0017729A /* SelectionAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703CE2B63CCEB0017729A /* SelectionAlertViewController.swift */; };
+		841703C52B624BD80017729A /* TimePickerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703C42B624BD80017729A /* TimePickerCellView.swift */; };
+		841703CD2B6297630017729A /* MusicDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703CC2B6297630017729A /* MusicDatabaseManager.swift */; };
+		841703CF2B63CCEB0017729A /* SelectionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703CE2B63CCEB0017729A /* SelectionAlertView.swift */; };
 		841703D12B63E4630017729A /* MusicPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703D02B63E4630017729A /* MusicPlayViewController.swift */; };
 		841703D52B65469A0017729A /* TestMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 841703D42B65469A0017729A /* TestMusic.mp3 */; };
-		84AE7ED22B5E34D1001829EE /* SchoolDateBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE7ED12B5E34D1001829EE /* SchoolDateBaseManager.swift */; };
+		841703D72B67A2500017729A /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841703D62B67A2500017729A /* UserDefaultsKeys.swift */; };
+		84AE7ED22B5E34D1001829EE /* SchoolDatebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE7ED12B5E34D1001829EE /* SchoolDatebaseManager.swift */; };
 		84AE7ED42B5E4F73001829EE /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE7ED32B5E4F73001829EE /* ImageData.swift */; };
 		84FBDAB12B59025600522EB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84FBDAAF2B59025600522EB2 /* LaunchScreen.storyboard */; };
 		84FBDAB92B59043E00522EB2 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84FBDAB82B59043E00522EB2 /* Image.xcassets */; };
 		84FBDACB2B5BBBB000522EB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84FBDACA2B5BBBB000522EB2 /* Assets.xcassets */; };
 		84FBDACF2B5E17FF00522EB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDACE2B5E17FF00522EB2 /* AppDelegate.swift */; };
-		84FBDAD12B5E180900522EB2 /* CellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDAD02B5E180900522EB2 /* CellViewController.swift */; };
+		84FBDAD12B5E180900522EB2 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDAD02B5E180900522EB2 /* CellView.swift */; };
 		84FBDAD32B5E181700522EB2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDAD22B5E181700522EB2 /* DetailViewController.swift */; };
 		84FBDAD52B5E182900522EB2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDAD42B5E182900522EB2 /* ViewController.swift */; };
 		B8F21954C7798098264AF56D /* Pods_iOS_phone_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAAC6E258DA6EA7D589737E3 /* Pods_iOS_phone_test.framework */; };
@@ -28,14 +29,15 @@
 
 /* Begin PBXFileReference section */
 		5AEC5D150BB04BEAB3F783B1 /* Pods-iOS-phone-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-phone-test.release.xcconfig"; path = "Target Support Files/Pods-iOS-phone-test/Pods-iOS-phone-test.release.xcconfig"; sourceTree = "<group>"; };
-		841703C02B612AFE0017729A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		841703C02B612AFE0017729A /* CollectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellView.swift; sourceTree = "<group>"; };
 		841703C22B622FAE0017729A /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
-		841703C42B624BD80017729A /* TimePickerCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCellViewController.swift; sourceTree = "<group>"; };
-		841703CC2B6297630017729A /* MusicDataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDataBaseManager.swift; sourceTree = "<group>"; };
-		841703CE2B63CCEB0017729A /* SelectionAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionAlertViewController.swift; sourceTree = "<group>"; };
+		841703C42B624BD80017729A /* TimePickerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCellView.swift; sourceTree = "<group>"; };
+		841703CC2B6297630017729A /* MusicDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDatabaseManager.swift; sourceTree = "<group>"; };
+		841703CE2B63CCEB0017729A /* SelectionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionAlertView.swift; sourceTree = "<group>"; };
 		841703D02B63E4630017729A /* MusicPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayViewController.swift; sourceTree = "<group>"; };
 		841703D42B65469A0017729A /* TestMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestMusic.mp3; sourceTree = SOURCE_ROOT; };
-		84AE7ED12B5E34D1001829EE /* SchoolDateBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDateBaseManager.swift; sourceTree = "<group>"; };
+		841703D62B67A2500017729A /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		84AE7ED12B5E34D1001829EE /* SchoolDatebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDatebaseManager.swift; sourceTree = "<group>"; };
 		84AE7ED32B5E4F73001829EE /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		84FBDAA12B59025400522EB2 /* iOS-phone-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-phone-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84FBDAB02B59025600522EB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,7 +45,7 @@
 		84FBDAB82B59043E00522EB2 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = SOURCE_ROOT; };
 		84FBDACA2B5BBBB000522EB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		84FBDACE2B5E17FF00522EB2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84FBDAD02B5E180900522EB2 /* CellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewController.swift; sourceTree = "<group>"; };
+		84FBDAD02B5E180900522EB2 /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		84FBDAD22B5E181700522EB2 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		84FBDAD42B5E182900522EB2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		896A8463D40B19DAA131E02F /* Pods-iOS-phone-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-phone-test.debug.xcconfig"; path = "Target Support Files/Pods-iOS-phone-test/Pods-iOS-phone-test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,17 +95,18 @@
 			children = (
 				841703D42B65469A0017729A /* TestMusic.mp3 */,
 				84AE7ED32B5E4F73001829EE /* ImageData.swift */,
+				841703D62B67A2500017729A /* UserDefaultsKeys.swift */,
 				84FBDACE2B5E17FF00522EB2 /* AppDelegate.swift */,
 				84FBDAD42B5E182900522EB2 /* ViewController.swift */,
-				84FBDAD02B5E180900522EB2 /* CellViewController.swift */,
+				84FBDAD02B5E180900522EB2 /* CellView.swift */,
 				84FBDAD22B5E181700522EB2 /* DetailViewController.swift */,
-				841703C02B612AFE0017729A /* CollectionViewController.swift */,
+				841703C02B612AFE0017729A /* CollectionCellView.swift */,
 				841703C22B622FAE0017729A /* TimePickerViewController.swift */,
-				841703C42B624BD80017729A /* TimePickerCellViewController.swift */,
-				841703CE2B63CCEB0017729A /* SelectionAlertViewController.swift */,
+				841703C42B624BD80017729A /* TimePickerCellView.swift */,
+				841703CE2B63CCEB0017729A /* SelectionAlertView.swift */,
 				841703D02B63E4630017729A /* MusicPlayViewController.swift */,
-				841703CC2B6297630017729A /* MusicDataBaseManager.swift */,
-				84AE7ED12B5E34D1001829EE /* SchoolDateBaseManager.swift */,
+				841703CC2B6297630017729A /* MusicDatabaseManager.swift */,
+				84AE7ED12B5E34D1001829EE /* SchoolDatebaseManager.swift */,
 				84FBDAB82B59043E00522EB2 /* Image.xcassets */,
 				84FBDACA2B5BBBB000522EB2 /* Assets.xcassets */,
 				84FBDAAF2B59025600522EB2 /* LaunchScreen.storyboard */,
@@ -240,16 +243,17 @@
 			files = (
 				84FBDAD32B5E181700522EB2 /* DetailViewController.swift in Sources */,
 				841703C32B622FAE0017729A /* TimePickerViewController.swift in Sources */,
-				84FBDAD12B5E180900522EB2 /* CellViewController.swift in Sources */,
-				841703CF2B63CCEB0017729A /* SelectionAlertViewController.swift in Sources */,
+				841703D72B67A2500017729A /* UserDefaultsKeys.swift in Sources */,
+				84FBDAD12B5E180900522EB2 /* CellView.swift in Sources */,
+				841703CF2B63CCEB0017729A /* SelectionAlertView.swift in Sources */,
 				84FBDAD52B5E182900522EB2 /* ViewController.swift in Sources */,
-				841703C12B612AFE0017729A /* CollectionViewController.swift in Sources */,
-				84AE7ED22B5E34D1001829EE /* SchoolDateBaseManager.swift in Sources */,
+				841703C12B612AFE0017729A /* CollectionCellView.swift in Sources */,
+				84AE7ED22B5E34D1001829EE /* SchoolDatebaseManager.swift in Sources */,
 				84FBDACF2B5E17FF00522EB2 /* AppDelegate.swift in Sources */,
 				84AE7ED42B5E4F73001829EE /* ImageData.swift in Sources */,
-				841703CD2B6297630017729A /* MusicDataBaseManager.swift in Sources */,
+				841703CD2B6297630017729A /* MusicDatabaseManager.swift in Sources */,
 				841703D12B63E4630017729A /* MusicPlayViewController.swift in Sources */,
-				841703C52B624BD80017729A /* TimePickerCellViewController.swift in Sources */,
+				841703C52B624BD80017729A /* TimePickerCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +399,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KG7S3KD32U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS-phone-test/Info.plist";
@@ -426,6 +431,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KG7S3KD32U;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS-phone-test/Info.plist";

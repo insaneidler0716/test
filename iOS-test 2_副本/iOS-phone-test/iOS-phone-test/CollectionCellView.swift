@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import YYWebImage
 
-class CollectionViewController: UICollectionViewCell {
+class CollectionCellView: UICollectionViewCell {
     
     private let collectionLabel: UILabel = {
         let label = UILabel()
@@ -23,6 +23,7 @@ class CollectionViewController: UICollectionViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
+    
      // 对勾图标
     private let markImageView: UIImageView = {
         let imageView = UIImageView()
@@ -80,7 +81,6 @@ class CollectionViewController: UICollectionViewCell {
             UIView.animate(withDuration: 0.3) {
             self.markImageView.alpha = 0.0
             }
-    
             // 恢复默认边框
             collectionRemoteImageView.layer.borderColor = UIColor.lightGray.cgColor
             // 移除对勾图标

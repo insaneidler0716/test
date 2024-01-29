@@ -22,7 +22,7 @@ class TimePickerViewController: UIViewController {
     // 时间
     let hours: [Int] = Array(0...23)
     let minutes: [Int] = Array(0...59)
-    
+    // 时间选择器
     let timePicker: UIPickerView = {
         let picker = UIPickerView()
         return picker
@@ -37,13 +37,12 @@ class TimePickerViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 40
-        tableView.register(TimePickerCellViewController.self, forCellReuseIdentifier: "timePickerCell")
+        tableView.register(TimePickerCellView.self, forCellReuseIdentifier: "timePickerCell")
         return tableView
     }()
     
     // 单元格左部标签
     let tableData: [String] = ["播放模式", "音乐效果"]
-    
     
     // 底部按钮
     var selectedButton: UIButton?
@@ -55,39 +54,23 @@ class TimePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 背景
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        view.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        // 时间选择器
-        // 获取系统时间的表示形式
-        _ = DateFormatter()
-        let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)
-        // 判断时间制度
-        if let format = dateFormat, format.contains("a") {
-            print("系统时间制度：12 小时制")
-            timeSystem = true
+        // 根据当前外观模式更新背景颜色
+        if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
         } else {
-            print("系统时间制度：24 小时制")
-            timeSystem = false
+            view.backgroundColor = .white
         }
-        backgroundView.addSubview(timePicker)
-        timePicker.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(250)
-        }
-        timePicker.dataSource = self
-        timePicker.delegate = self
-        setupTimePicker()
         
+        // 顶部标签
+        view.addSubview(detailLabel)
+        detailLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(65)
+        }
         // 开关
         setupSwitch()
         MVPlaySwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
-        backgroundView.addSubview(MVPlaySwitch)
+        view.addSubview(MVPlaySwitch)
         MVPlaySwitch.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-30)
             make.top.equalToSuperview().offset(150)
@@ -100,34 +83,54 @@ class TimePickerViewController: UIViewController {
             label.text = "播放MV"
             return label
         }()
-        backgroundView.addSubview(buttonLabel)
+        view.addSubview(buttonLabel)
         buttonLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.centerY.equalTo(MVPlaySwitch.snp.centerY)
         }
         
+        // 时间选择器
+        // 获取系统时间的表示形式
+        _ = DateFormatter()
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)
+        // 判断时间制度
+        if let format = dateFormat, format.contains("a") {
+            //print("系统时间制度：12 小时制")
+            timeSystem = true
+        } else {
+            //print("系统时间制度：24 小时制")
+            timeSystem = false
+        }
+        view.addSubview(timePicker)
+        timePicker.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(MVPlaySwitch.snp.bottom).offset(20)
+        }
+        timePicker.dataSource = self
+        timePicker.delegate = self
+        setupTimePicker()
+        
+        
         // 列表
-        backgroundView.addSubview(timePickerTableView)
+        view.addSubview(timePickerTableView)
         //view.addSubview(timePickerTableView)
         timePickerTableView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            //make.edges.equalToSuperview()
-            make.top.equalToSuperview().offset(500)
+            make.top.equalTo(timePicker.snp.bottom).offset(20)
             make.width.equalToSuperview()
             make.height.equalTo(100)
         }
         
-        // 按钮背景
+        // 底部按钮背景
         let buttonBackgroundView = UIView()
         buttonBackgroundView.backgroundColor = .gray
-        backgroundView.addSubview(buttonBackgroundView)
+        view.addSubview(buttonBackgroundView)
         buttonBackgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(850)
+            make.bottom.equalToSuperview().offset(-30)
             make.centerX.equalToSuperview()
             make.width.equalTo(150)
             make.height.equalTo(50)
         }
-        
         // 底部按钮创建
         let button = createOptionButton(title: "开始播放", tag: 1)
         buttonBackgroundView.addSubview(button)
@@ -138,12 +141,6 @@ class TimePickerViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        // 顶部标签
-        backgroundView.addSubview(detailLabel)
-        detailLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(65)
-        }
         
     }
     // MV播放开关
@@ -151,17 +148,17 @@ class TimePickerViewController: UIViewController {
         if sender.isOn {
             print("MV播放开启")
             // 保存开关状态到 UserDefaults
-            UserDefaults.standard.set(true, forKey: "MVPlayEnabled")
+            UserDefaults.standard.set(true, forKey: kMVPlayEnabled)
         } else {
             print("MV播放关闭")
             // 保存开关状态到 UserDefaults
-            UserDefaults.standard.set(false, forKey: "MVPlayEnabled")
+            UserDefaults.standard.set(false, forKey: kMVPlayEnabled)
         }
     }
     // MV播放开关初始化
     func setupSwitch() {
         // 从 UserDefaults 中读取开关状态，默认为关闭
-        let isMVEanbled = UserDefaults.standard.bool(forKey: "MVPlayEnabled")
+        let isMVEanbled = UserDefaults.standard.bool(forKey: kMVPlayEnabled)
         // 设置开关状态
         MVPlaySwitch.isOn = isMVEanbled
     }
@@ -186,9 +183,9 @@ class TimePickerViewController: UIViewController {
         let coverImageUrl = MusicDatabaseManager.shared.getAlbumImageUrl(forAlbum: detailLabel.text!)
         musicPlayViewController.configure(imageUrl: coverImageUrl!)
         musicPlayViewController.songLabel.text = detailLabel.text!
-        musicPlayViewController.playMode = UserDefaults.standard.string(forKey: "SelectedPlayMode") ?? ""
-        musicPlayViewController.musicEffect = UserDefaults.standard.string(forKey: "SelectedMusicEffect") ?? ""
-        if let buttonSelectedValue = UserDefaults.standard.value(forKey: "RadioButtonSelectedValue") as? Int {
+        musicPlayViewController.playMode = UserDefaults.standard.string(forKey: kSelectedPlayMode) ?? ""
+        musicPlayViewController.musicEffect = UserDefaults.standard.string(forKey: kSelectedMusicEffect) ?? ""
+        if let buttonSelectedValue = UserDefaults.standard.value(forKey: kRadioButtonSelectedValue) as? Int {
             switch Int(buttonSelectedValue) {
             case 0:
                 musicPlayViewController.countdownDuration = 100
@@ -199,19 +196,36 @@ class TimePickerViewController: UIViewController {
             case 3:
                 musicPlayViewController.countdownDuration = 30
             case 4:
-                musicPlayViewController.countdownDuration = 40
+                musicPlayViewController.countdownDuration = 60
             case 5:
                 musicPlayViewController.countdownDuration = 120
             default:
                 musicPlayViewController.countdownDuration = 100
             }
         }
-        //var sec = UserDefaults.standard.bool(forKey: "RadioButtonSelected\(button.tag)")
-        //musicPlayViewController.countdownDuration = 30
-        //musicPlayViewController.timeLabel.text = 10
-        //self.navigationController?.popViewController(animated: true)
         self.navigationController?.pushViewController(musicPlayViewController, animated: true)
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            // 主题模式发生变化，执行相应的更新操作
+            updateInterfaceForCurrentTheme()
+        }
+    }
+
+    func updateInterfaceForCurrentTheme() {
+        // 在这里执行更新界面的操作
+        if traitCollection.userInterfaceStyle == .dark {
+            // 暗色模式
+            view.backgroundColor = .black
+        } else {
+            // 亮色模式
+            view.backgroundColor = .white
+        }
+    }
+
 }
 
 extension TimePickerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -268,25 +282,25 @@ extension TimePickerViewController: UIPickerViewDataSource, UIPickerViewDelegate
             let selectedTime = String(format: "%02d:%02d %@", selectedHour, selectedMinute, selectedAMPM)
             print("Selected time: \(selectedTime)")
             // 保存选中的时间到 UserDefaults
-            UserDefaults.standard.set(selectedHour, forKey: "SelectedHour")
-            UserDefaults.standard.set(selectedMinute, forKey: "SelectedMinute")
-            UserDefaults.standard.set(selectedAMPM, forKey: "SelectedAMPM")
+            UserDefaults.standard.set(selectedHour, forKey: kSelectedHour)
+            UserDefaults.standard.set(selectedMinute, forKey: kSelectedMinute)
+            UserDefaults.standard.set(selectedAMPM, forKey: kSelectedAMPM)
         } else {
             let selectedHour = hours[pickerView.selectedRow(inComponent: 0)]
             let selectedMinute = minutes[pickerView.selectedRow(inComponent: 1)]
             let selectedTime = String(format: "%02d:%02d", selectedHour, selectedMinute)
             print("Selected time: \(selectedTime)")
             // 保存选中的时间到 UserDefaults
-            UserDefaults.standard.set(selectedHour, forKey: "SelectedHour")
-            UserDefaults.standard.set(selectedMinute, forKey: "SelectedMinute")
+            UserDefaults.standard.set(selectedHour, forKey: kSelectedHour)
+            UserDefaults.standard.set(selectedMinute, forKey: kSelectedMinute)
         }
     }
     // 时间选择器初始化
     func setupTimePicker() {
         // 从 UserDefaults 中读取保存的小时、分钟和AM/PM，默认为空字符串
-        let savedHour = UserDefaults.standard.string(forKey: "SelectedHour") ?? ""
-        let savedMinute = UserDefaults.standard.string(forKey: "SelectedMinute") ?? ""
-        let savedAMPM = UserDefaults.standard.string(forKey: "SelectedAMPM") ?? ""
+        let savedHour = UserDefaults.standard.string(forKey: kSelectedHour) ?? ""
+        let savedMinute = UserDefaults.standard.string(forKey: kSelectedMinute) ?? ""
+        let savedAMPM = UserDefaults.standard.string(forKey: kSelectedAMPM) ?? ""
 
         // 将保存的小时和分钟转换为整数
         if let hour = Int(savedHour), let minute = Int(savedMinute) {
@@ -310,11 +324,11 @@ extension TimePickerViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let timePickerCell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell", for: indexPath) as! TimePickerCellViewController
+        let timePickerCell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell", for: indexPath) as! TimePickerCellView
         timePickerCell.accessoryType = .disclosureIndicator
         timePickerCell.titleLabel.text = tableData[indexPath.row]
-        let selectedPlayMode = UserDefaults.standard.string(forKey: "SelectedPlayMode") ?? ""
-        let selectdedMusicEffect = UserDefaults.standard.string(forKey: "SelectedMusicEffect") ?? ""
+        let selectedPlayMode = UserDefaults.standard.string(forKey: kSelectedPlayMode) ?? ""
+        let selectdedMusicEffect = UserDefaults.standard.string(forKey: kSelectedMusicEffect) ?? ""
         if indexPath.row == 0 {
             timePickerCell.selectionRightLabel.text = selectedPlayMode
         } else {
@@ -331,7 +345,6 @@ extension TimePickerViewController: UITableViewDelegate, UITableViewDataSource {
             showMusicEffectOptions()
         }
     }
-
 }
 
 

@@ -7,69 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iOS-phone-test/TimePickerViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04 - 25df9ab2f62a4a51"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; __C.UILabel in iOS_phone_test.TimePickerViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "iOS-phone-test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lihaonan/Desktop/iOS-test%202/iOS-phone-test/iOS-phone-test/TimePickerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04 - d23fe66580c4880b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iOS_phone_test.TimePickerViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "iOS-phone-test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lihaonan/Desktop/iOS-test%202/iOS-phone-test/iOS-phone-test/TimePickerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "456">
-               </Location>
-               <Location
-                  uuid = "A667DDA9-BF0F-40A8-BE96-F24344112A04 - 25df9ab2f62a4b8f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; __C.UILabel in iOS_phone_test.TimePickerViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "iOS-phone-test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lihaonan/Desktop/iOS-test%202/iOS-phone-test/iOS-phone-test/TimePickerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "132">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "303CB6F5-BF15-47A8-AEB4-C5612FEB0A40"
             shouldBeEnabled = "No"
             ignoreCount = "0"

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import YYWebImage
 
-class TimePickerCellViewController: UITableViewCell {
+class TimePickerCellView: UITableViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()

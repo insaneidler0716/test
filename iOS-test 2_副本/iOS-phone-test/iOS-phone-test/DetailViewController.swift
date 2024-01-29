@@ -33,8 +33,7 @@ class DetailViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = false
-        collectionView.register(CollectionViewController.self, forCellWithReuseIdentifier: "collection")
-        collectionView.backgroundColor = .white
+        collectionView.register(CollectionCellView.self, forCellWithReuseIdentifier: "collection")
         return collectionView
     }()
     
@@ -55,29 +54,19 @@ class DetailViewController: UIViewController {
         
         //专辑数据写入
         albumData = MusicDatabaseManager.shared.getAlbumsForSinger(singerName: detailLabel.text!)
-        // 背景
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        view.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        
+        // 根据当前外观模式更新背景颜色
+        if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
+        } else {
+            view.backgroundColor = .white
         }
         
-        // 按钮背景
-        let buttonBackgroundView = UIView()
-        buttonBackgroundView.backgroundColor = .gray
-        backgroundView.addSubview(buttonBackgroundView)
-        buttonBackgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(850)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(50)
-        }
         
         // 开关
         setupBackgroundKeepSwitch()
         detailSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
-        backgroundView.addSubview(detailSwitch)
+        view.addSubview(detailSwitch)
         detailSwitch.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-30)
             make.top.equalToSuperview().offset(150)
@@ -90,12 +79,33 @@ class DetailViewController: UIViewController {
             label.text = "后台保持"
             return label
         }()
-        backgroundView.addSubview(buttonLabel)
+        view.addSubview(buttonLabel)
         buttonLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.centerY.equalTo(detailSwitch.snp.centerY)
         }
         
+        // collectionView
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(200)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(buttonLabel.snp.bottom).offset(20)
+        }
+        
+        // 单选按钮标签
+        let singleSeclectionRadioButtonLabel: UILabel = {
+            let label = UILabel()
+            label.font = UIFont.systemFont(ofSize: 16)
+            label.text = "请选择播放时间"
+            return label
+        }()
+        view.addSubview(singleSeclectionRadioButtonLabel)
+        singleSeclectionRadioButtonLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(30)
+            make.top.equalTo(collectionView.snp.bottom).offset(20)
+        }
         
         // 单选按钮创建
         createSingleSelectionRadioButton(title: "10 seconds", tag: 1)
@@ -105,25 +115,24 @@ class DetailViewController: UIViewController {
         createSingleSelectionRadioButton(title: "120 seconds", tag: 5)
         // 单选按钮约束
         for (index, button) in singleSeclectionRadioButton.enumerated() {
-            backgroundView.addSubview(button)
+            view.addSubview(button)
 
             button.snp.makeConstraints { make in
                 make.left.equalToSuperview().offset(30)
-                make.top.equalToSuperview().offset(450 + index * 40)
+                make.top.equalTo(singleSeclectionRadioButtonLabel.snp.bottom).offset(20 + index * 40)
             }
         }
         setupSingleSelectionRadioButtons()
-        // 单选按钮标签
-        let singleSeclectionRadioButtonLabel: UILabel = {
-            let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: 16)
-            label.text = "单选标签"
-            return label
-        }()
-        backgroundView.addSubview(singleSeclectionRadioButtonLabel)
-        singleSeclectionRadioButtonLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(30)
-            make.top.equalToSuperview().offset(400)
+        
+        // 底部按钮背景
+        let buttonBackgroundView = UIView()
+        buttonBackgroundView.backgroundColor = .gray
+        view.addSubview(buttonBackgroundView)
+        buttonBackgroundView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(150)
+            make.height.equalTo(50)
         }
         
         // 底部按钮创建
@@ -137,17 +146,8 @@ class DetailViewController: UIViewController {
         }
         
         
-        // collectionView
-        backgroundView.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalTo(200)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
-        }
-        
         // 图片
-        backgroundView.addSubview(detailRemoteImageView)
+        view.addSubview(detailRemoteImageView)
         detailRemoteImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(650)
@@ -156,7 +156,7 @@ class DetailViewController: UIViewController {
         }
         
         // 顶部标签
-        backgroundView.addSubview(detailLabel)
+        view.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(65)
@@ -175,16 +175,16 @@ class DetailViewController: UIViewController {
         if sender.isOn {
             print("后台保持开启")
             // 保存后台保持开关状态到 UserDefaults
-            UserDefaults.standard.set(true, forKey: "BackgroundKeepEnabled")
+            UserDefaults.standard.set(true, forKey: kBackgroundKeepEnabled)
         } else {
             print("后台保持关闭")
             // 保存后台保持开关状态到 UserDefaults
-            UserDefaults.standard.set(false, forKey: "BackgroundKeepEnabled")
+            UserDefaults.standard.set(false, forKey: kBackgroundKeepEnabled)
         }
     }
     func setupBackgroundKeepSwitch() {
         // 从 UserDefaults 中读取后台保持开关状态，默认为关闭
-        let isBackgroundKeepEnabled = UserDefaults.standard.bool(forKey: "BackgroundKeepEnabled")
+        let isBackgroundKeepEnabled = UserDefaults.standard.bool(forKey: kBackgroundKeepEnabled)
         // 设置后台保持开关状态
         detailSwitch.isOn = isBackgroundKeepEnabled
     }
@@ -192,7 +192,12 @@ class DetailViewController: UIViewController {
     func createSingleSelectionRadioButton(title: String, tag: Int) {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        if traitCollection.userInterfaceStyle == .dark {
+            button.setTitleColor(UIColor.white, for: .normal)
+
+        } else {
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         button.setImage(UIImage(systemName: "circle"), for: .normal)
         button.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .selected)
         button.tag = tag
@@ -206,23 +211,22 @@ class DetailViewController: UIViewController {
         // 如果点击的按钮已经是选中状态，则取消选中并保存状态
         if sender.isSelected {
             sender.isSelected = false
-            UserDefaults.standard.set(false, forKey: "RadioButtonSelected\(sender.tag)")
+            UserDefaults.standard.set(false, forKey: kRadioButtonSelected.appending("(\(sender.tag))"))
             print("你取消了选择")
-            UserDefaults.standard.setValue( 0 , forKey: "RadioButtonSelectedValue")
+            UserDefaults.standard.setValue( 0 , forKey: kRadioButtonSelectedValue)
             return
         }
         // 取消之前选中的按钮的选中状态
         for button in singleSeclectionRadioButton {
             button.isSelected = false
             // 保存取消选择的按钮状态
-            UserDefaults.standard.set(false, forKey: "RadioButtonSelected\(button.tag)")
+            UserDefaults.standard.set(false, forKey: kRadioButtonSelected.appending("(\(button.tag))"))
         }
         // 更新当前选中的按钮
         sender.isSelected = true
         // 保存选中的按钮状态
-        UserDefaults.standard.set(true, forKey: "RadioButtonSelected\(sender.tag)")
-        UserDefaults.standard.setValue(sender.tag , forKey: "RadioButtonSelectedValue")
-        print(sender.tag)
+        UserDefaults.standard.set(true, forKey: kRadioButtonSelected.appending("(\(sender.tag))"))
+        UserDefaults.standard.setValue(sender.tag , forKey: kRadioButtonSelectedValue)
 
         // 在这里执行选中后的操作，比如处理选中的选项
         let selectedOption = sender.tag
@@ -232,7 +236,7 @@ class DetailViewController: UIViewController {
     func setupSingleSelectionRadioButtons() {
         // 设置单选按钮的初始状态
         for button in singleSeclectionRadioButton {
-            let isSelected = UserDefaults.standard.bool(forKey: "RadioButtonSelected\(button.tag)")
+            let isSelected = UserDefaults.standard.bool(forKey: kRadioButtonSelected.appending("(\(button.tag))"))
             button.isSelected = isSelected
         }
     }
@@ -242,7 +246,6 @@ class DetailViewController: UIViewController {
     func createOptionButton(title: String, tag: Int) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
         button.tag = tag
         button.addTarget(self, action: #selector(optionButtonTapped(_:)), for: .touchUpInside)
         return button
@@ -256,9 +259,35 @@ class DetailViewController: UIViewController {
         selectedButton?.isSelected = true
         // 在这里执行选中后的操作，比如处理选中的选项
         self.navigationController?.popViewController(animated: true)
-
-        
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            // 主题模式发生变化，执行相应的更新操作
+            updateInterfaceForCurrentTheme()
+            
+        }
+    }
+
+    func updateInterfaceForCurrentTheme() {
+        // 在这里执行更新界面的操作
+        if traitCollection.userInterfaceStyle == .dark {
+            // 暗色模式
+            view.backgroundColor = .black
+            for button in singleSeclectionRadioButton {
+                button.setTitleColor(UIColor.white, for: .normal)
+            }
+        } else {
+            // 亮色模式
+            view.backgroundColor = .white
+            for button in singleSeclectionRadioButton {
+                button.setTitleColor(UIColor.black, for: .normal)
+            }
+        }
+    }
+
 }
 
 extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -272,13 +301,12 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collection = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! CollectionViewController
+        let collection = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! CollectionCellView
         let item = albumData[indexPath.row]
         collection.configure(text: item.label, imageUrl: item.remoteImageUrl)
         return collection
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print("你选择了 \(indexPath.item)")
         let index = indexPath.item
         print(albumData[index].label)
         let timePickerViewController = TimePickerViewController()
