@@ -22,3 +22,5 @@ let kSelectedMusicEffect: String = "SelectedMusicEffect"
 let kSelectedHour: String = "SelectedHour"
 let kSelectedMinute: String = "SelectedMinute"
 let kSelectedAMPM: String = "SelectedAMPM"
+// 选中的专辑
+let kSelectedAlbum: String = "SelectedAlbum"

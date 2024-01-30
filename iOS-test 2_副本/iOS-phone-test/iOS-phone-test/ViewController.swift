@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CellView.self, forCellReuseIdentifier: "cell")
+        tableView.register(SingerTableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
 
@@ -42,7 +42,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SingerTableViewCell
         let item = singerData[indexPath.row]
         cell.configure(text: item.label, imageUrl: item.remoteImageUrl)
         return cell

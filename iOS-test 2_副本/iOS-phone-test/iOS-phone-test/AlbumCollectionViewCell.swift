@@ -9,23 +9,23 @@ import UIKit
 import SnapKit
 import YYWebImage
 
-class CollectionCellView: UICollectionViewCell {
+class AlbumCollectionViewCell: UICollectionViewCell {
     
-    private let collectionLabel: UILabel = {
+    let collectionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
         
-    private let collectionRemoteImageView: UIImageView = {
+    let collectionRemoteImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
     
-     // 对勾图标
-    private let markImageView: UIImageView = {
+    // 对勾图标
+    let markImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -38,6 +38,12 @@ class CollectionCellView: UICollectionViewCell {
         addSubview(collectionRemoteImageView)
         addSubview(collectionLabel)
         addSubview(markImageView)
+        
+        if let selectedAlbum: Int = UserDefaults.standard.value(forKey: kSelectedAlbum) as? Int {
+            print(selectedAlbum)
+            //collectionView.reloadData()
+            
+        }
 
         collectionRemoteImageView.snp.makeConstraints { make in
             make.height.equalTo(100)
@@ -50,12 +56,19 @@ class CollectionCellView: UICollectionViewCell {
             make.centerY.equalTo(collectionRemoteImageView.snp.centerY).offset(70)
             make.height.equalTo(10)
         }
+        
+        markImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-5)
+            make.bottom.equalToSuperview().offset(-5)
+            make.width.height.equalTo(20)
+        }
+        
     }
     override var isSelected: Bool {
         didSet {
             super.isSelected = isSelected
-            // 当 isSelected 发生变化时，更新 UI
             updateUI()
+            
         }
     }
     private func updateUI() {
@@ -66,21 +79,7 @@ class CollectionCellView: UICollectionViewCell {
             // 添加对勾图标
             markImageView.image = UIImage(systemName: "checkmark.circle.fill")
             markImageView.tintColor = UIColor.blue
-            // 调整对勾图标位置
-            markImageView.snp.makeConstraints { make in
-                make.trailing.equalToSuperview().offset(-5)
-                make.bottom.equalToSuperview().offset(-5)
-                make.width.height.equalTo(20)
-                // 添加淡入动画
-                UIView.animate(withDuration: 0.3) {
-                    self.markImageView.alpha = 1.0
-                }
-            }
         }else {
-            // 添加淡出动画
-            UIView.animate(withDuration: 0.3) {
-            self.markImageView.alpha = 0.0
-            }
             // 恢复默认边框
             collectionRemoteImageView.layer.borderColor = UIColor.lightGray.cgColor
             // 移除对勾图标

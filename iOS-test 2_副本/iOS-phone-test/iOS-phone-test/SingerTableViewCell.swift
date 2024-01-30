@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import YYWebImage
 
-class CellView: UITableViewCell {
+class SingerTableViewCell: UITableViewCell {
     
     
     private let cellLabel: UILabel = {

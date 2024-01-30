@@ -37,7 +37,7 @@ class TimePickerViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 40
-        tableView.register(TimePickerCellView.self, forCellReuseIdentifier: "timePickerCell")
+        tableView.register(TimePickerViewCell.self, forCellReuseIdentifier: "timePickerCell")
         return tableView
     }()
     
@@ -48,7 +48,7 @@ class TimePickerViewController: UIViewController {
     var selectedButton: UIButton?
     
     // 开关
-    let MVPlaySwitch = UISwitch()
+    let mvPlaySwitch = UISwitch()
     
     
     override func viewDidLoad() {
@@ -69,9 +69,9 @@ class TimePickerViewController: UIViewController {
         }
         // 开关
         setupSwitch()
-        MVPlaySwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
-        view.addSubview(MVPlaySwitch)
-        MVPlaySwitch.snp.makeConstraints { make in
+        mvPlaySwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
+        view.addSubview(mvPlaySwitch)
+        mvPlaySwitch.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-30)
             make.top.equalToSuperview().offset(150)
             
@@ -86,7 +86,7 @@ class TimePickerViewController: UIViewController {
         view.addSubview(buttonLabel)
         buttonLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
-            make.centerY.equalTo(MVPlaySwitch.snp.centerY)
+            make.centerY.equalTo(mvPlaySwitch.snp.centerY)
         }
         
         // 时间选择器
@@ -104,7 +104,7 @@ class TimePickerViewController: UIViewController {
         view.addSubview(timePicker)
         timePicker.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(MVPlaySwitch.snp.bottom).offset(20)
+            make.top.equalTo(mvPlaySwitch.snp.bottom).offset(20)
         }
         timePicker.dataSource = self
         timePicker.delegate = self
@@ -160,7 +160,7 @@ class TimePickerViewController: UIViewController {
         // 从 UserDefaults 中读取开关状态，默认为关闭
         let isMVEanbled = UserDefaults.standard.bool(forKey: kMVPlayEnabled)
         // 设置开关状态
-        MVPlaySwitch.isOn = isMVEanbled
+        mvPlaySwitch.isOn = isMVEanbled
     }
     
     func createOptionButton(title: String, tag: Int) -> UIButton {
@@ -324,7 +324,7 @@ extension TimePickerViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let timePickerCell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell", for: indexPath) as! TimePickerCellView
+        let timePickerCell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell", for: indexPath) as! TimePickerViewCell
         timePickerCell.accessoryType = .disclosureIndicator
         timePickerCell.titleLabel.text = tableData[indexPath.row]
         let selectedPlayMode = UserDefaults.standard.string(forKey: kSelectedPlayMode) ?? ""

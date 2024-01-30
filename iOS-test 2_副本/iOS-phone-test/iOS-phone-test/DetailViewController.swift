@@ -32,8 +32,8 @@ class DetailViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.isPagingEnabled = false
-        collectionView.register(CollectionCellView.self, forCellWithReuseIdentifier: "collection")
+        collectionView.isPagingEnabled = true
+        collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: "collection")
         return collectionView
     }()
     
@@ -49,8 +49,12 @@ class DetailViewController: UIViewController {
     // 开关
     let detailSwitch = UISwitch()
     
+    // UIScrollView
+    let detailScrollView = UIScrollView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         //专辑数据写入
         albumData = MusicDatabaseManager.shared.getAlbumsForSinger(singerName: detailLabel.text!)
@@ -62,14 +66,34 @@ class DetailViewController: UIViewController {
             view.backgroundColor = .white
         }
         
+        // 底部按钮
+        let button = createOptionButton(title: "返回", tag: 1)
+        view.addSubview(button)
+        button.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(150)
+            make.height.equalTo(50)
+        }
+    
+        
+        // UIScrollView
+        detailScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 900)
+        view.addSubview(detailScrollView)
+        detailScrollView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalTo(button.snp.top).offset(-10)
+        }
         
         // 开关
         setupBackgroundKeepSwitch()
         detailSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
-        view.addSubview(detailSwitch)
+        detailScrollView.addSubview(detailSwitch)
         detailSwitch.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-30)
-            make.top.equalToSuperview().offset(150)
+            make.left.equalToSuperview().offset(300)
+            make.top.equalToSuperview().offset(40)
             
         }
         // 开关标签
@@ -79,20 +103,31 @@ class DetailViewController: UIViewController {
             label.text = "后台保持"
             return label
         }()
-        view.addSubview(buttonLabel)
+        detailScrollView.addSubview(buttonLabel)
         buttonLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.centerY.equalTo(detailSwitch.snp.centerY)
         }
         
         // collectionView
-        view.addSubview(collectionView)
+        detailScrollView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(200)
             make.centerX.equalToSuperview()
             make.top.equalTo(buttonLabel.snp.bottom).offset(20)
         }
+        // 延时滑动到上次选中的位置
+        let delayInSeconds: Double = 1.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
+            // 滑动到上次选择的位置
+            if let selectedAlbum: Int = UserDefaults.standard.value(forKey: kSelectedAlbum) as? Int {
+                print(selectedAlbum)
+                self.collectionView.scrollToItem(at: IndexPath(row: selectedAlbum, section: 0), at: .centeredVertically, animated: true)
+                self.collectionView.reloadData()
+            }
+        }
+
         
         // 单选按钮标签
         let singleSeclectionRadioButtonLabel: UILabel = {
@@ -101,7 +136,7 @@ class DetailViewController: UIViewController {
             label.text = "请选择播放时间"
             return label
         }()
-        view.addSubview(singleSeclectionRadioButtonLabel)
+        detailScrollView.addSubview(singleSeclectionRadioButtonLabel)
         singleSeclectionRadioButtonLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.top.equalTo(collectionView.snp.bottom).offset(20)
@@ -115,7 +150,7 @@ class DetailViewController: UIViewController {
         createSingleSelectionRadioButton(title: "120 seconds", tag: 5)
         // 单选按钮约束
         for (index, button) in singleSeclectionRadioButton.enumerated() {
-            view.addSubview(button)
+            detailScrollView.addSubview(button)
 
             button.snp.makeConstraints { make in
                 make.left.equalToSuperview().offset(30)
@@ -124,30 +159,10 @@ class DetailViewController: UIViewController {
         }
         setupSingleSelectionRadioButtons()
         
-        // 底部按钮背景
-        let buttonBackgroundView = UIView()
-        buttonBackgroundView.backgroundColor = .gray
-        view.addSubview(buttonBackgroundView)
-        buttonBackgroundView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-30)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(50)
-        }
-        
-        // 底部按钮创建
-        let button = createOptionButton(title: "返回", tag: 1)
-        buttonBackgroundView.addSubview(button)
-        // 底部按钮约束
-        button.snp.makeConstraints { make in
-            make.center.equalTo(buttonBackgroundView)
-            make.width.equalTo(100)
-            make.height.equalTo(40)
-        }
         
         
         // 图片
-        view.addSubview(detailRemoteImageView)
+        detailScrollView.addSubview(detailRemoteImageView)
         detailRemoteImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(650)
@@ -156,12 +171,13 @@ class DetailViewController: UIViewController {
         }
         
         // 顶部标签
-        view.addSubview(detailLabel)
+        detailScrollView.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(65)
+            make.top.equalToSuperview().offset(-30)
         }
     }
+
     
     func configure(text: String, imageUrl: String) {
         let placeholderImage = UIImage(named: "IMG_PlaceHolder")
@@ -246,6 +262,7 @@ class DetailViewController: UIViewController {
     func createOptionButton(title: String, tag: Int) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.lightGray
         button.tag = tag
         button.addTarget(self, action: #selector(optionButtonTapped(_:)), for: .touchUpInside)
         return button
@@ -267,7 +284,6 @@ class DetailViewController: UIViewController {
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             // 主题模式发生变化，执行相应的更新操作
             updateInterfaceForCurrentTheme()
-            
         }
     }
 
@@ -301,14 +317,31 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collection = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! CollectionCellView
+        let collection = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! AlbumCollectionViewCell
         let item = albumData[indexPath.row]
         collection.configure(text: item.label, imageUrl: item.remoteImageUrl)
+        if let selectedAlbum: Int = UserDefaults.standard.value(forKey: kSelectedAlbum) as? Int {
+            if indexPath.row == selectedAlbum {
+                // 高亮边框
+                collection.collectionRemoteImageView.layer.borderColor = UIColor.blue.cgColor
+                collection.collectionRemoteImageView.layer.borderWidth = 1.0
+                // 添加对勾图标
+                collection.markImageView.image = UIImage(systemName: "checkmark.circle.fill")
+                collection.markImageView.tintColor = UIColor.blue
+            } else {
+                // 恢复默认边框
+                collection.collectionRemoteImageView.layer.borderColor = UIColor.lightGray.cgColor
+                // 移除对勾图标
+                collection.markImageView.image = nil
+            }
+        }
         return collection
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.item
+        UserDefaults.standard.setValue(index, forKey: kSelectedAlbum)
         print(albumData[index].label)
+        collectionView.reloadData()
         let timePickerViewController = TimePickerViewController()
         timePickerViewController.detailLabel.text = albumData[index].label
         navigationController?.pushViewController(timePickerViewController, animated: true)
