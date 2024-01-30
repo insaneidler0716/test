@@ -121,24 +121,14 @@ class TimePickerViewController: UIViewController {
             make.height.equalTo(100)
         }
         
-        // 底部按钮背景
-        let buttonBackgroundView = UIView()
-        buttonBackgroundView.backgroundColor = .gray
-        view.addSubview(buttonBackgroundView)
-        buttonBackgroundView.snp.makeConstraints { make in
+        // 底部按钮
+        let button = createOptionButton(title: "开始播放", tag: 1)
+        view.addSubview(button)
+        button.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-30)
             make.centerX.equalToSuperview()
             make.width.equalTo(150)
             make.height.equalTo(50)
-        }
-        // 底部按钮创建
-        let button = createOptionButton(title: "开始播放", tag: 1)
-        buttonBackgroundView.addSubview(button)
-        // 底部按钮约束
-        button.snp.makeConstraints { make in
-            make.center.equalTo(buttonBackgroundView)
-            make.width.equalTo(100)
-            make.height.equalTo(40)
         }
         
         
@@ -166,7 +156,7 @@ class TimePickerViewController: UIViewController {
     func createOptionButton(title: String, tag: Int) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor.lightGray
         button.tag = tag
         button.addTarget(self, action: #selector(optionButtonTapped(_:)), for: .touchUpInside)
         return button
